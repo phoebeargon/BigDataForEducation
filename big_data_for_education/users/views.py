@@ -2,9 +2,9 @@ from django.core.urlresolvers import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.shortcuts import render, redirect
 from .models import User
-
+from .forms import DocumentForm
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
@@ -43,3 +43,15 @@ class UserListView(LoginRequiredMixin, ListView):
     # These next two lines tell the view to index lookups by username
     slug_field = 'username'
     slug_url_kwarg = 'username'
+
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            #post.author = request.user
+            #post.save()
+            return redirect('home')
+    else:
+        form = DocumentForm()
+    return render(request, 'pages/model_form_upload.html', {'form': form})
