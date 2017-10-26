@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <BR>
+  <h1>Thank you for uploading your document!</h1>
+  </BR>
+
+  <BR><p><a href="{% url 'model_form_upload' %}">Upload another document</a></p></BR>
+  <BR><p><a href="{% url 'home' %}">Return to home</a></p></BR>
+{% endblock %}

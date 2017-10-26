@@ -1,3 +1,4 @@
+from big_data_for_education.users import views
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
@@ -8,6 +9,7 @@ from django.views import defaults as default_views
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^about/$', TemplateView.as_view(template_name='pages/about.html'), name='about'),
+    url(r'^upload/$', views.model_form_upload, name='model_form_upload'),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, admin.site.urls),
